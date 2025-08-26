@@ -172,34 +172,57 @@ export default function ItineraryPage() {
           </p>
         </div>
 
-        {/* Modern Feature Card */}
+        {/* City Snapshot */}
         <div className="max-w-4xl mx-auto mb-8">
           <div className="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl p-8 text-white shadow-xl">
             <div className="flex items-center justify-between">
               <div className="flex-1">
-                <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white/20 text-white mb-4">
-                  Premium
-                </div>
                 <h2 className="text-3xl font-bold mb-3">
-                  Welcome to TripMeOut AI Planner
+                  City Snapshot
                 </h2>
                 <p className="text-emerald-50 text-lg mb-6">
-                  Unleash your creativity with our comprehensive suite of professional travel planning tools and resources.
+                  Discover the vibrant culture, rich history, and modern charm of {destination}. From ancient temples to cutting-edge technology, this dynamic metropolis offers an unforgettable blend of tradition and innovation.
                 </p>
-                <div className="flex gap-4">
-                  <Button className="bg-white text-emerald-600 hover:bg-emerald-50 font-medium px-6 py-2 rounded-full">
-                    Explore Plans
-                  </Button>
-                  <Button variant="ghost" className="border border-white/30 text-white hover:bg-white/10 font-medium px-6 py-2 rounded-full">
-                    Take a Tour
-                  </Button>
+                <div className="flex flex-wrap gap-3">
+                  <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-white/20 text-white backdrop-blur-sm">
+                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    Population: 37.4M
+                  </div>
+                  <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-white/20 text-white backdrop-blur-sm">
+                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                    </svg>
+                    Currency: JPY (¥)
+                  </div>
+                  <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-white/20 text-white backdrop-blur-sm">
+                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    Climate: Humid Subtropical
+                  </div>
+                  <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-white/20 text-white backdrop-blur-sm">
+                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Timezone: JST (UTC+9)
+                  </div>
+                  <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-white/20 text-white backdrop-blur-sm">
+                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                    </svg>
+                    Language: Japanese
+                  </div>
                 </div>
               </div>
               <div className="hidden md:block ml-8">
                 <div className="w-32 h-32 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
                   <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center">
                     <div className="w-12 h-12 bg-white/30 rounded-full flex items-center justify-center">
-                      <MapPin className="h-6 w-6 text-white" />
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                      </svg>
                     </div>
                   </div>
                 </div>
