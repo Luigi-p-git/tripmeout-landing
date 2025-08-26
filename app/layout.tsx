@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Instrument_Serif, Roboto } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif, Roboto, Fredericka_the_Great } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { V0Provider } from "@/lib/context";
@@ -30,6 +30,12 @@ const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
 });
 
+const frederickaTheGreat = Fredericka_the_Great({
+  variable: "--font-fredericka",
+  subsets: ["latin"],
+  weight: ["400"],
+});
+
 const isV0 = process.env['VERCEL_URL']?.includes('vusercontent.net') ?? false
 
 export const metadata: Metadata = {
@@ -49,7 +55,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={cn(geistSans.variable, geistMono.variable, instrumentSerif.variable, roboto.variable)}
+        className={cn(geistSans.variable, geistMono.variable, instrumentSerif.variable, roboto.variable, frederickaTheGreat.variable)}
       >
         <V0Provider isV0={isV0}>
           {children}

@@ -34,6 +34,7 @@ module.exports = {
       fontFamily: {
         serif: ["var(--font-instrument-serif)", "serif"],
         roboto: ["var(--font-roboto)", "sans-serif"],
+        fredericka: ["var(--font-fredericka)", "cursive"],
       },
       boxShadow: {
         button:
