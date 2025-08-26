@@ -1,8 +1,9 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useSearchParams } from "next/navigation"
+import { useSearchParams, useRouter } from "next/navigation"
 import { motion, AnimatePresence, Reorder } from "framer-motion"
+import Link from "next/link"
 import {
   MapPin,
   Search,
@@ -18,6 +19,7 @@ import {
   Users,
   Trash2,
   GripVertical,
+  LogOut,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -124,6 +126,7 @@ interface PlaceCard {
 
 export default function ItineraryPage() {
   const searchParams = useSearchParams()
+  const router = useRouter()
   const destination = searchParams.get('destination') || 'Tokyo, Japan'
   
   const [searchQuery, setSearchQuery] = useState("")
@@ -161,23 +164,41 @@ export default function ItineraryPage() {
 
   return (
     <main className="h-[100dvh] w-full bg-white">
-      <div className="h-full flex flex-col p-6">
+      <div className="h-full flex flex-col relative">
+        {/* Navigation */}
+        <nav className="absolute top-0 left-0 right-0 z-20 p-6">
+          <div className="flex justify-between items-center backdrop-blur-sm bg-white/10 rounded-full px-6 py-3 border border-gray-200 shadow-lg">
+            <div className="flex items-center space-x-8">
+              <Link href="/" className="font-fredericka text-2xl font-bold text-black hover:text-gray-700 transition-colors">
+                TripMeOut
+              </Link>
+              <Link href="/trip-planner" className="text-black hover:text-gray-700 transition-colors font-medium">
+                My Trips
+              </Link>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              <Button 
+                onClick={() => router.push('/trip-planner')} 
+                className="bg-white/20 hover:bg-white/30 text-gray-900 border border-gray-300 backdrop-blur-sm transition-all duration-200 rounded-full flex items-center gap-2"
+              >
+                <LogOut className="h-4 w-4" />
+                Go Back
+              </Button>
+            </div>
+          </div>
+        </nav>
+
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 font-fredericka mb-2">
-            Plan Your {destination} Trip
-          </h1>
-          <p className="text-xl text-gray-700 font-medium">
-            Drag places to create your perfect itinerary
-          </p>
+        <div className="text-center mb-8 pt-24 px-6">
         </div>
 
         {/* City Snapshot */}
-        <div className="max-w-4xl mx-auto mb-8">
+        <div className="max-w-4xl mx-auto mb-8 px-6">
           <div className="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl p-8 text-white shadow-xl">
             <div className="flex items-center justify-between">
               <div className="flex-1">
-                <h2 className="text-3xl font-bold mb-3">
+                <h2 className="text-3xl font-bold mb-3 font-fredericka">
                   City Snapshot
                 </h2>
                 <p className="text-emerald-50 text-lg mb-6">
@@ -232,7 +253,7 @@ export default function ItineraryPage() {
         </div>
 
         {/* Search Bar */}
-        <div className="max-w-md mx-auto mb-8">
+        <div className="max-w-md mx-auto mb-8 px-6">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
             <Input
@@ -245,7 +266,7 @@ export default function ItineraryPage() {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8 min-h-0">
+        <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-8 min-h-0 px-6">
           {/* Available Places */}
           <div className="flex flex-col">
             <h2 className="text-2xl font-bold text-gray-900 mb-4 font-fredericka">
