@@ -85,8 +85,8 @@ export default function TripPlannerPage() {
    */
   const handleDestinationSearch = (query: string) => {
     if (query.trim()) {
-      // Navigate to search results page with the query
-      window.location.href = `/trip-planner/search?q=${encodeURIComponent(query)}`
+      // Navigate to itinerary page with the query
+      window.location.href = `/itinerary?destination=${encodeURIComponent(query)}`
     }
   }
 
@@ -94,8 +94,8 @@ export default function TripPlannerPage() {
    * Handle city selection from autocomplete
    */
   const handleCitySelect = (city: PlaceSuggestion) => {
-    // Navigate to search results page with the selected city
-    window.location.href = `/trip-planner/search?q=${encodeURIComponent(city.mainText)}&city=${encodeURIComponent(city.placeId)}`
+    // Navigate to itinerary page with the selected city
+    window.location.href = `/itinerary?destination=${encodeURIComponent(city.mainText)}&city=${encodeURIComponent(city.placeId)}`
   }
 
 
