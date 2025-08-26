@@ -4,9 +4,11 @@ import { useEffect, useState } from 'react'
 import { db, auth, type Trip, type User } from '@/lib/supabase'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { CityAutocomplete } from '@/components/ui/city-autocomplete'
 import { TripCard } from '@/components/trip-card'
 import { Plus, User, MapPin, Search, X } from 'lucide-react'
 import Link from 'next/link'
+import { type PlaceSuggestion } from '@/lib/google-places'
 
 /**
  * Main Trip Planner page component
@@ -19,6 +21,7 @@ export default function TripPlannerPage() {
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState<any>(null)
   const [isManifestoOpen, setIsManifestoOpen] = useState(false)
+  const [destinationSearch, setDestinationSearch] = useState('')
 
   useEffect(() => {
     checkUser()
@@ -77,6 +80,24 @@ export default function TripPlannerPage() {
     }
   }
 
+  /**
+   * Handle destination search for unauthenticated users
+   */
+  const handleDestinationSearch = (query: string) => {
+    if (query.trim()) {
+      // Navigate to search results page with the query
+      window.location.href = `/trip-planner/search?q=${encodeURIComponent(query)}`
+    }
+  }
+
+  /**
+   * Handle city selection from autocomplete
+   */
+  const handleCitySelect = (city: PlaceSuggestion) => {
+    // Navigate to search results page with the selected city
+    window.location.href = `/trip-planner/search?q=${encodeURIComponent(city.mainText)}&city=${encodeURIComponent(city.placeId)}`
+  }
+
 
 
   if (loading) {
@@ -104,24 +125,16 @@ export default function TripPlannerPage() {
           </div>
           
           {/* Search Bar */}
-          <div className="relative">
-            <div className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10">
-              <Search className="h-6 w-6 text-white/80" />
-            </div>
-            <Input
-              type="text"
-              placeholder="Search destinations, create itineraries, discover places..."
-              className="pl-14 pr-32 h-16 text-lg bg-white/10 border-white/30 text-white placeholder:text-white/70 focus:bg-white/15 focus:border-white/50 rounded-full backdrop-blur-md shadow-2xl"
-            />
-            <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
-              <Button 
-                className="h-12 px-6 bg-primary hover:bg-primary/90 text-primary-foreground backdrop-blur-sm transition-all duration-200 rounded-full shadow-button hover:shadow-button-hover"
-              >
-                <Search className="h-5 w-5 mr-2" />
-                Search
-              </Button>
-            </div>
-          </div>
+          <CityAutocomplete
+            placeholder="Search destinations, create itineraries, discover places..."
+            size="large"
+            showSearchButton={true}
+            value={destinationSearch}
+            onChange={setDestinationSearch}
+            onSearch={handleDestinationSearch}
+            onCitySelect={handleCitySelect}
+            className="w-full"
+          />
           
           {/* Quick Actions */}
           <div className="flex flex-wrap justify-center gap-4 mt-8">
@@ -168,16 +181,15 @@ export default function TripPlannerPage() {
           
           {/* Search Bar and Lucky Strike Button */}
           <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
-            <div className="relative max-w-md w-full sm:w-auto">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-white/60" />
-              <Input
-                type="text"
-                placeholder="Search trips by destination, title, or description..."
-                value={searchQuery}
-                onChange={(e) => handleSearch(e.target.value)}
-                className="pl-10 bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:bg-white/15 focus:border-white/40 rounded-full backdrop-blur-sm"
-              />
-            </div>
+            <CityAutocomplete
+              placeholder="Search trips by destination, title, or description..."
+              size="default"
+              showSearchButton={false}
+              value={searchQuery}
+              onChange={handleSearch}
+              onCitySelect={(city) => handleSearch(city.mainText)}
+              className="max-w-md w-full sm:w-auto"
+            />
             
             {/* Lucky Strike Button */}
              <Button

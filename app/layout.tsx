@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Instrument_Serif, Roboto, Fredericka_the_Great } fro
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { V0Provider } from "@/lib/context";
+import { ErrorBoundary } from "@/components/error-boundary";
 import dynamic from "next/dynamic";
 
 const V0Setup = dynamic(() => import("@/components/v0-setup"));
@@ -57,10 +58,12 @@ export default function RootLayout({
       <body
         className={cn(geistSans.variable, geistMono.variable, instrumentSerif.variable, roboto.variable, frederickaTheGreat.variable)}
       >
-        <V0Provider isV0={isV0}>
-          {children}
-          {isV0 && <V0Setup />}
-        </V0Provider>
+        <ErrorBoundary>
+          <V0Provider isV0={isV0}>
+            {children}
+            {isV0 && <V0Setup />}
+          </V0Provider>
+        </ErrorBoundary>
       </body>
     </html>
   );
